@@ -14,7 +14,8 @@ Version 1.0
   - Fonts are defined as part of CSS
   - Only for top edge of the screen
   - Size: 140x260 visible, 16x290 shadowed
-  - Can only be added to main window (check for this)
+  - Can only be added to main window (check for this?)
+  - Long texts will be cut/hidden
   - Browsers: Webkit-based, FF3.6+, IE7+
 
 Version 2.0

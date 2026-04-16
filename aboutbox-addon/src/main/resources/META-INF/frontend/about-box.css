@@ -1,0 +1,198 @@
+/*
+ * Styles for <about-box> shadow DOM.
+ *
+ * url() references are resolved by Vite's CSS pipeline when this file is
+ * imported with ?inline, so standard relative paths work correctly.
+ *
+ * Google Fonts (@import) cannot be used here because @import is not allowed
+ * inside shadow DOM <style> elements. The Tangerine font is loaded instead
+ * via a <link> injected into document <head> in connectedCallback().
+ */
+
+/* --------------------------------------------------------------------------
+ * Host & positioning
+ * -------------------------------------------------------------------------- */
+:host {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    /* The host itself is a transparent passthrough; only the inner
+       .about div captures pointer events. */
+    pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+ * Main panel
+ * -------------------------------------------------------------------------- */
+.about {
+    position: absolute;
+    top: -250px;   /* hidden above viewport (collapsed) */
+    width: 160px;
+    height: 290px;
+    transition: top 0.4s ease-out;
+    text-align: center;
+    color: #a0a0a0;
+    cursor: pointer;
+    pointer-events: all;
+    box-sizing: border-box;
+}
+
+:host([alignright]) .about { right: 0; }
+:host(:not([alignright])) .about { left: 0; }
+
+.about.open {
+    top: -30px;   /* slide down — tab peek visible */
+}
+
+/* --------------------------------------------------------------------------
+ * Inner elements
+ * -------------------------------------------------------------------------- */
+.title {
+    width: 120px;
+    height: 60px;
+    overflow: hidden;
+    margin: 55px auto 0;
+    line-height: 1.3;
+}
+
+.description {
+    width: 120px;
+    height: 65px;
+    overflow: hidden;
+    margin: 15px auto 0;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.link {
+    width: 120px;
+    height: 20px;
+    margin: 10px auto 0;
+    cursor: pointer;
+    font-size: 0.85em;
+}
+
+.link:empty {
+    display: none;
+}
+
+.caption {
+    width: 120px;
+    margin: 29px auto 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.2s ease-in-out 0.3s;
+    font-size: 0.9em;
+    letter-spacing: 0.05em;
+}
+
+.about.open .caption {
+    display: none;
+}
+
+/* --------------------------------------------------------------------------
+ * THEME: leather (default)
+ * -------------------------------------------------------------------------- */
+:host([theme="leather"]) .about {
+    background-image: url('./about-box-images/bg-leather.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    color: #c8b89a;
+}
+
+:host([theme="leather"]) .title {
+    font-family: 'Tangerine', 'Georgia', cursive;
+    font-size: 1.6em;
+    color: #f5f0e8;
+    font-weight: 700;
+}
+
+:host([theme="leather"]) .description {
+    color: #c8b89a;
+}
+
+:host([theme="leather"]) .link {
+    color: #d4a96a;
+    text-decoration: underline;
+}
+
+:host([theme="leather"]) .caption {
+    color: #a89070;
+}
+
+:host([theme="leather"]) .about.open .caption,
+:host([theme="leather"]) .about.hl .caption {
+    color: #c8b89a;
+}
+
+/* --------------------------------------------------------------------------
+ * THEME: vaadin
+ * -------------------------------------------------------------------------- */
+:host([theme="vaadin"]) .about {
+    background-image: url('./about-box-images/bg-vaadin.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    color: #5d8093;
+    font-family: Arial, 'Helvetica Neue', sans-serif;
+}
+
+:host([theme="vaadin"]) .title {
+    color: #ffffff;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+:host([theme="vaadin"]) .description {
+    color: #a8c8d8;
+}
+
+:host([theme="vaadin"]) .link {
+    color: #60b0d0;
+    text-decoration: underline;
+}
+
+:host([theme="vaadin"]) .caption {
+    color: #5d8093;
+}
+
+:host([theme="vaadin"]) .about.hl .caption {
+    color: #80b0c8;
+}
+
+/* --------------------------------------------------------------------------
+ * THEME: brushed-metal
+ * -------------------------------------------------------------------------- */
+:host([theme="brushed-metal"]) .about {
+    background-image: url('./about-box-images/bg-brushed-metal.png');
+    background-repeat: no-repeat;
+    background-position: center top;
+    color: #8a8a8a;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+:host([theme="brushed-metal"]) .title {
+    color: #d8d8d8;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+}
+
+:host([theme="brushed-metal"]) .description {
+    color: #aaaaaa;
+}
+
+:host([theme="brushed-metal"]) .link {
+    color: #88aabb;
+    text-decoration: underline;
+}
+
+:host([theme="brushed-metal"]) .caption {
+    color: #7a7a7a;
+}
+
+:host([theme="brushed-metal"]) .about.hl .caption {
+    color: #aaaaaa;
+}
